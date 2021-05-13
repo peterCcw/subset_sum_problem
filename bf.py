@@ -11,7 +11,7 @@ def subset_sum_BF(set, target, n):
     :return: tuple (boolean, unsigned int, list)
     """
     if n == 0 or target == 0:
-        return 0, []
+        return False, 0, []
 
     # if element is bigger than target, it is not considered
     elif set[n - 1] > target:
@@ -24,20 +24,25 @@ def subset_sum_BF(set, target, n):
         included = subset_sum_BF(set=set, target=target-set[n-1], n=n-1)
         excluded = subset_sum_BF(set=set, target=target, n=n-1)
 
-        included_sum = set[n - 1] + included[0]
-        excluded_sum = excluded[0]
+        # choosing bigger sum of elements
+        included_sum = set[n - 1] + included[1]
+        excluded_sum = excluded[1]
 
         # initializing output vars
         output_set = []
         output_val = 0
-        
-        # choosing bigger sum of elements
+        does_subset_exist = False
+
+
         if included_sum >= excluded_sum:
-            included[1].append(set[n - 1])
-            output_set = included[1]
+            included[2].append(set[n - 1])
+            output_set = included[2]
             output_val = included_sum
         else:
-            output_set = excluded[1]
+            output_set = excluded[2]
             output_val = excluded_sum
 
-        return output_val, output_set
+        if output_val == target:
+            does_subset_exist = True
+
+        return does_subset_exist, output_val, output_set

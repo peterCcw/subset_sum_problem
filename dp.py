@@ -1,8 +1,9 @@
 def subset_sum_DP(set, target):
     """
     Finds in given set subset whose sum is equal or as close as possible to
-    given target. Uses dynamic programming algorithm. Returns tuple of vars:
-    is sum of subset equal to target, subset sum, subset as list and table.
+    given target. Uses dynamic programming algorithm. Needs set of numbers
+    and target value as an input, returns tuple of vars: is sum of subset 
+    equal to target, subset sum, subset as list and table.
 
     :param set: list<int>
     :param target: unsigned int
@@ -13,7 +14,7 @@ def subset_sum_DP(set, target):
     # fills table n x target with zeroes
     table = [[0 for x in range(target + 1)] for x in range(n + 1)]
 
-    # main part of algorithm
+    # main part of the algorithm
     for i in range(n + 1):
         for j in range(target + 1):
             if i == 0 or j == 0:
